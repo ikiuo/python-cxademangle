@@ -19,7 +19,7 @@ DEBUG = bool_getenv('DEBUG')
 MAJOR_VERSION = 0
 MINOR_VERSION = 1
 DEBUG_VERSION = 0
-VERSION = '%d.%d.%d' % (MAJOR_VERSION, MINOR_VERSION, DEBUG_VERSION)
+VERSION = f'{MAJOR_VERSION}.{MINOR_VERSION}.{DEBUG_VERSION}'
 
 DEFINE_MACROS = [
     ('MAJOR_VERSION', MAJOR_VERSION),
@@ -40,9 +40,14 @@ if DEBUG:
     EXTRA_COMPILE_ARGS.append('-O0')
 
 MODULE_NAME = 'cxademangle'
-EXTMOD_NAME = MODULE_NAME
-SOURCES = ['demangle.cpp']
 PACKAGES = None
+EXT_MODULES = [Extension(
+    name=MODULE_NAME,
+    define_macros=DEFINE_MACROS,
+    undef_macros=UNDEF_MACROS,
+    extra_compile_args=EXTRA_COMPILE_ARGS,
+    sources=['demangle.cpp'],
+)]
 
-setup(name=MODULE_NAME, version=VERSION, packages=PACKAGES,
-      ext_modules=[Extension(name=EXTMOD_NAME, sources=SOURCES)])
+setup(name=MODULE_NAME, version=VERSION,
+      packages=PACKAGES, ext_modules=EXT_MODULES)

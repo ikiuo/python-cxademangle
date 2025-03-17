@@ -3,10 +3,6 @@
 DEBUG ?= false
 DISTUTILS ?= false
 
-ifeq ($(DEBUG), true)
-BUILD_OPT = --debug
-endif
-
 PYTHON ?= python3
 
 ENVPARAM = DEBUG=$(DEBUG)
@@ -20,7 +16,7 @@ all:
 
 install:
 	env $(ENVPARAM) $(PYTHON) -m pip wheel .
-	env $(ENVPARAM) $(PYTHON) -m pip install --user cxademangle-*.whl
+	env $(ENVPARAM) $(PYTHON) -m pip install --user $(MODNAME)-*.whl
 
 clean:
 	rm -rf build dist $(MODNAME).egg-info
