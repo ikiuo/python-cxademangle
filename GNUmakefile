@@ -20,7 +20,7 @@ all:
 
 install:
 	env $(ENVPARAM) $(PYTHON) -m pip wheel .
-	env $(ENVPARAM) $(PYTHON) -m pip install cxademangle-*.whl
+	env $(ENVPARAM) $(PYTHON) -m pip install --user cxademangle-*.whl
 
 clean:
 	rm -rf build dist $(MODNAME).egg-info
